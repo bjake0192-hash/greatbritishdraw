@@ -20,17 +20,17 @@ export default async function AdminPage() {
 
   if (!auth) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#fafafa]">
-        <form action={login} className="bg-white p-10 rounded-2xl border border-zinc-200 shadow-sm max-w-sm w-full">
-          <h1 className="text-2xl font-serif mb-8 text-center text-zinc-900">Admin Login</h1>
+      <div className="min-h-screen flex items-center justify-center">
+        <form action={login} className="bg-white p-10 rounded-3xl border-2 border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.08)] max-w-sm w-full">
+          <h1 className="text-3xl font-serif font-black mb-8 text-center text-slate-900">Admin Login</h1>
           <input 
             type="password" 
             name="password" 
             placeholder="Enter Password" 
-            className="w-full p-3 border-b-2 border-zinc-200 focus:border-zinc-900 focus:outline-none transition-colors bg-transparent rounded-none mb-8 text-zinc-900"
+            className="w-full p-4 border-2 border-slate-200 rounded-xl focus:border-amber-400 focus:outline-none transition-colors bg-slate-50 mb-8 text-slate-900 font-bold"
           />
-          <button type="submit" className="w-full bg-zinc-950 text-white font-medium p-3 rounded-lg hover:bg-zinc-800 transition-colors">
-            Login
+          <button type="submit" className="w-full bg-slate-900 text-white font-bold text-lg p-4 rounded-xl hover:bg-slate-800 transition-colors">
+            Unlock
           </button>
         </form>
       </div>
@@ -52,12 +52,12 @@ export default async function AdminPage() {
   const totalIncome = totalIncomeResult._sum.pricePaid || 0;
 
   return (
-    <div className="min-h-screen bg-[#fafafa] p-8 text-zinc-900 font-sans selection:bg-zinc-900 selection:text-white">
+    <div className="min-h-screen p-8 text-slate-900 font-sans">
       <div className="max-w-5xl mx-auto py-8">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
-          <h1 className="text-4xl font-serif text-zinc-950">Admin Dashboard</h1>
-          <div className="text-sm font-medium border border-emerald-200 bg-emerald-50 text-emerald-800 px-4 py-2 rounded-full flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          <h1 className="text-4xl md:text-5xl font-serif font-black text-slate-900">Admin Dashboard</h1>
+          <div className="text-sm font-bold border-2 border-emerald-200 bg-emerald-50 text-emerald-800 px-6 py-3 rounded-full flex items-center gap-3 shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             Total Income: £{totalIncome.toFixed(2)}
           </div>
         </div>
@@ -69,22 +69,23 @@ export default async function AdminPage() {
             const freeTickets = totalTickets - paidTickets;
 
             return (
-              <div key={draw.id} className="bg-white p-8 rounded-2xl shadow-sm border border-zinc-200">
-                <h2 className="text-2xl font-serif mb-1 text-zinc-900">{draw.name}</h2>
-                <div className="text-xs font-semibold uppercase tracking-widest text-zinc-400 mb-8">Prize: £{draw.prize}</div>
+              <div key={draw.id} className="bg-white p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.05)] border-2 border-slate-200 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-2 h-full bg-blue-500"></div>
+                <h2 className="text-2xl font-serif font-bold mb-1 text-slate-900">{draw.name}</h2>
+                <div className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-8">Prize: £{draw.prize}</div>
                 
-                <div className="space-y-4">
-                  <div className="flex justify-between font-light text-zinc-600">
+                <div className="space-y-4 font-medium">
+                  <div className="flex justify-between text-slate-600">
                     <span>Total Tickets in Draw</span>
-                    <span className="font-medium text-zinc-900">{totalTickets}</span>
+                    <span className="font-bold text-slate-900">{totalTickets}</span>
                   </div>
-                  <div className="flex justify-between font-light text-zinc-600">
+                  <div className="flex justify-between text-slate-600">
                     <span>Paid Tickets</span>
-                    <span className="font-medium text-zinc-900">{paidTickets}</span>
+                    <span className="font-bold text-slate-900">{paidTickets}</span>
                   </div>
-                  <div className="flex justify-between font-light text-zinc-600">
+                  <div className="flex justify-between text-slate-600">
                     <span>Bonus/Free Tickets</span>
-                    <span className="font-medium text-emerald-600">{freeTickets}</span>
+                    <span className="font-bold text-amber-500">{freeTickets}</span>
                   </div>
                 </div>
               </div>
@@ -92,7 +93,7 @@ export default async function AdminPage() {
           })}
           
           {draws.length === 0 && (
-            <div className="col-span-2 text-center text-zinc-500 font-light py-24 bg-white rounded-2xl border border-zinc-200 border-dashed">
+            <div className="col-span-2 text-center text-slate-500 font-bold py-24 bg-white rounded-3xl border-2 border-slate-200 border-dashed">
               No draws or tickets found yet.
             </div>
           )}
