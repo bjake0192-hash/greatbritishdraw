@@ -4,83 +4,86 @@ import { Ticket, Calendar, Gift, Zap, Crown } from 'lucide-react';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 font-sans text-white">
+    <div className="min-h-screen bg-[#fafafa] font-sans text-zinc-900 selection:bg-zinc-900 selection:text-white">
       {/* Hero Section */}
-      <main className="container mx-auto px-4 py-16">
-        <header className="text-center mb-16">
-          <div className="inline-block mb-4 px-6 py-2 bg-yellow-400 text-yellow-900 rounded-full font-bold text-sm tracking-widest uppercase shadow-lg transform -rotate-2">
-            The Great British Draw
+      <main className="container mx-auto px-6 py-12 md:py-24">
+        <header className="text-center mb-24">
+          <div className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 border border-zinc-200 text-zinc-600 rounded-full font-medium text-xs tracking-widest uppercase bg-white shadow-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Live Competitions
           </div>
-          <h1 className="text-5xl md:text-7xl font-black mb-6 drop-shadow-lg leading-tight">
-            Win Big. <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">Every Single Week.</span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-medium mb-8 text-zinc-950 tracking-tight leading-[1.1]">
+            The Great <br className="hidden md:block" />
+            <span className="italic text-zinc-500">British</span> Draw.
           </h1>
-          <p className="text-xl md:text-2xl opacity-90 mb-10 max-w-2xl mx-auto font-medium">
-            Next massive draw happens on the last day of the month at 10am UK time. Don&apos;t miss out!
+          <p className="text-lg md:text-xl text-zinc-600 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+            Premium competitions with guaranteed winners. The next draw takes place on the last day of the month at 10am.
           </p>
 
-          <div className="max-w-md mx-auto mb-12">
-            <h3 className="text-lg font-bold mb-4 uppercase tracking-wider text-pink-200">Time until next draw:</h3>
-            <Countdown />
-            <p className="mt-4 text-sm opacity-80">Winners contacted & transferred the next working day!</p>
+          <div className="max-w-md mx-auto p-8 bg-white border border-zinc-200 rounded-2xl shadow-sm">
+            <h3 className="text-xs font-semibold mb-6 uppercase tracking-widest text-zinc-400">Time remaining</h3>
+            <div className="text-zinc-900">
+              <Countdown />
+            </div>
+            <p className="mt-6 text-xs text-zinc-500 font-medium">Winnings transferred the next working day.</p>
           </div>
         </header>
 
         {/* Competitions */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
           {/* Standard Draw */}
-          <div className="bg-white text-slate-900 rounded-3xl p-8 shadow-2xl relative overflow-hidden transform hover:scale-[1.02] transition-transform border-4 border-transparent hover:border-yellow-400">
-            <div className="absolute top-0 right-0 bg-blue-500 text-white px-6 py-2 rounded-bl-2xl font-bold flex items-center gap-2">
-              <Ticket size={18} /> Most Popular
+          <div className="bg-white rounded-2xl p-8 md:p-10 border border-zinc-200 shadow-sm relative group hover:border-zinc-300 transition-colors">
+            <div className="absolute top-8 right-8 text-[10px] font-bold uppercase tracking-widest text-zinc-900 bg-zinc-100 px-3 py-1 rounded-full">
+              Standard
             </div>
-            <h2 className="text-3xl font-black mb-2 text-blue-600">Standard Draw</h2>
-            <div className="text-5xl font-black mb-6">£10,000 <span className="text-lg text-slate-500 font-bold">Monthly Prize</span></div>
+            <h2 className="text-2xl font-serif mb-2 text-zinc-900">Monthly Draw</h2>
+            <div className="text-5xl font-light tracking-tight mb-8 text-zinc-950">£10,000</div>
             
-            <ul className="space-y-4 mb-8">
-              <li className="flex items-center gap-3 font-medium">
-                <div className="bg-blue-100 p-2 rounded-full text-blue-600"><Calendar size={20} /></div>
-                £1 per ticket for the Monthly Draw
-              </li>
-              <li className="flex items-center gap-3 font-medium">
-                <div className="bg-green-100 p-2 rounded-full text-green-600"><Gift size={20} /></div>
-                Add 50p to enter the Weekly Draw (£500 Prize!)
-              </li>
-              <li className="flex items-center gap-3 font-medium text-purple-700 bg-purple-50 p-3 rounded-xl border border-purple-200">
-                <Zap size={20} className="text-yellow-500" />
-                Buy 10 tickets, get 20! (Direct debit doubles tickets!)
-              </li>
-            </ul>
+            <div className="space-y-5 mb-10 text-zinc-600 text-sm md:text-base">
+              <div className="flex items-start gap-4">
+                <div className="mt-0.5"><Ticket size={18} className="text-zinc-400" /></div>
+                <p>£1 per ticket entry into the primary draw.</p>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="mt-0.5"><Calendar size={18} className="text-zinc-400" /></div>
+                <p>Add 50p to also enter the Weekly £500 draw.</p>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="mt-0.5"><Zap size={18} className="text-zinc-400" /></div>
+                <p>Buy 10 tickets, receive 20. Double your total with Direct Debit.</p>
+              </div>
+            </div>
 
-            <Link href="/checkout?type=standard" className="block w-full py-4 px-6 bg-blue-600 hover:bg-blue-700 text-white text-center rounded-xl font-bold text-xl transition-colors shadow-lg shadow-blue-600/30">
-              Enter Standard Draw
+            <Link href="/checkout?type=standard" className="block w-full py-4 px-6 bg-zinc-950 hover:bg-zinc-800 text-white text-center rounded-xl font-medium transition-colors">
+              Enter Draw
             </Link>
           </div>
 
           {/* High Roller Draw */}
-          <div className="bg-slate-900 text-white rounded-3xl p-8 shadow-2xl relative overflow-hidden transform hover:scale-[1.02] transition-transform border-4 border-transparent hover:border-pink-500">
-            <div className="absolute top-0 right-0 bg-pink-500 text-white px-6 py-2 rounded-bl-2xl font-bold flex items-center gap-2">
-              <Crown size={18} /> VIP
+          <div className="bg-zinc-950 rounded-2xl p-8 md:p-10 border border-zinc-800 shadow-sm relative group hover:border-zinc-700 transition-colors">
+            <div className="absolute top-8 right-8 text-[10px] font-bold uppercase tracking-widest text-zinc-950 bg-white px-3 py-1 rounded-full">
+              VIP
             </div>
-            <h2 className="text-3xl font-black mb-2 text-pink-400">High Roller</h2>
-            <div className="text-5xl font-black mb-6">£25,000 <span className="text-lg text-slate-400 font-bold">Bi-Monthly Prize</span></div>
+            <h2 className="text-2xl font-serif mb-2 text-white">High Roller</h2>
+            <div className="text-5xl font-light tracking-tight mb-8 text-white">£25,000</div>
             
-            <ul className="space-y-4 mb-8">
-              <li className="flex items-center gap-3 font-medium">
-                <div className="bg-slate-800 p-2 rounded-full text-pink-400"><Calendar size={20} /></div>
-                £2 per ticket for the Bi-Monthly Draw
-              </li>
-              <li className="flex items-center gap-3 font-medium">
-                <div className="bg-slate-800 p-2 rounded-full text-green-400"><Gift size={20} /></div>
-                Add 50p to enter the Weekly High Roller (£1,500 Prize!)
-              </li>
-              <li className="flex items-center gap-3 font-medium text-yellow-300 bg-slate-800 p-3 rounded-xl border border-slate-700">
-                <Zap size={20} className="text-yellow-500" />
-                Buy 10 tickets, get 20! (Direct debit doubles tickets!)
-              </li>
-            </ul>
+            <div className="space-y-5 mb-10 text-zinc-400 text-sm md:text-base">
+              <div className="flex items-start gap-4">
+                <div className="mt-0.5"><Ticket size={18} className="text-zinc-600" /></div>
+                <p>£2 per ticket entry into the Bi-Monthly draw.</p>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="mt-0.5"><Calendar size={18} className="text-zinc-600" /></div>
+                <p>Add 50p to also enter the Weekly High Roller (£1,500).</p>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="mt-0.5"><Zap size={18} className="text-zinc-600" /></div>
+                <p>Buy 10 tickets, receive 20. Double your total with Direct Debit.</p>
+              </div>
+            </div>
 
-            <Link href="/checkout?type=high-roller" className="block w-full py-4 px-6 bg-pink-600 hover:bg-pink-700 text-white text-center rounded-xl font-bold text-xl transition-colors shadow-lg shadow-pink-600/30">
-              Enter High Roller Draw
+            <Link href="/checkout?type=high-roller" className="block w-full py-4 px-6 bg-white hover:bg-zinc-200 text-zinc-950 text-center rounded-xl font-medium transition-colors">
+              Enter High Roller
             </Link>
           </div>
         </div>

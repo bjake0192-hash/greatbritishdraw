@@ -54,79 +54,84 @@ function CheckoutContent() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 px-4 text-slate-900">
-      <div className="max-w-xl mx-auto bg-white rounded-3xl shadow-xl p-8">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-black text-slate-800">
-            {isHighRoller ? 'High Roller Draw' : 'Standard Draw'}
+    <div className="min-h-screen bg-[#fafafa] py-12 md:py-24 px-6 text-zinc-900 selection:bg-zinc-900 selection:text-white">
+      <div className="max-w-xl mx-auto bg-white rounded-2xl border border-zinc-200 shadow-sm p-8 md:p-12">
+        <div className="flex justify-between items-center mb-12">
+          <h1 className="text-3xl md:text-4xl font-serif text-zinc-950">
+            {isHighRoller ? 'High Roller' : 'Monthly Draw'}
           </h1>
-          <Link href="/" className="text-blue-500 font-bold hover:underline">Back</Link>
+          <Link href="/" className="text-sm font-medium text-zinc-500 hover:text-zinc-900 transition-colors">Cancel</Link>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-8">
           {/* Ticket Count */}
           <div>
-            <label className="block text-sm font-bold text-slate-700 mb-2">How many tickets?</label>
+            <label className="block text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">Number of tickets</label>
             <input 
               type="number" 
               min="1" 
               value={ticketCount} 
               onChange={(e) => setTicketCount(Math.max(1, parseInt(e.target.value) || 1))}
-              className="w-full text-2xl font-bold p-4 border-2 border-slate-200 rounded-xl focus:border-blue-500 focus:ring-0"
+              className="w-full text-3xl font-light p-4 border-b-2 border-zinc-200 focus:border-zinc-900 focus:outline-none transition-colors bg-transparent rounded-none"
             />
             {isBuy10Offer && (
-              <p className="text-green-600 font-bold mt-2 text-sm">🎉 Buy 10 offer applied! Tickets doubled!</p>
+              <p className="text-emerald-600 font-medium mt-3 text-sm flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                Volume offer applied: Tickets doubled
+              </p>
             )}
           </div>
 
           {/* Add Weekly */}
-          <label className="flex items-center gap-4 p-4 border-2 border-slate-200 rounded-xl cursor-pointer hover:border-blue-300 transition-colors">
-            <input 
-              type="checkbox" 
-              checked={addWeekly} 
-              onChange={(e) => setAddWeekly(e.target.checked)}
-              className="w-6 h-6 text-blue-600 rounded-md"
-            />
+          <label className="flex items-start gap-4 p-5 border border-zinc-200 rounded-xl cursor-pointer hover:border-zinc-400 transition-colors group">
+            <div className="mt-0.5">
+              <input 
+                type="checkbox" 
+                checked={addWeekly} 
+                onChange={(e) => setAddWeekly(e.target.checked)}
+                className="w-5 h-5 text-zinc-900 border-zinc-300 rounded focus:ring-zinc-900 accent-zinc-900"
+              />
+            </div>
             <div>
-              <div className="font-bold text-lg">Add Weekly Draw (+50p per ticket)</div>
-              <div className="text-sm text-slate-500">Win {isHighRoller ? '£1,500' : '£500'} every week!</div>
+              <div className="font-medium text-zinc-900">Include Weekly Draw (+50p per ticket)</div>
+              <div className="text-sm text-zinc-500 mt-1 font-light">Enter the weekly draw for a chance to win {isHighRoller ? '£1,500' : '£500'}.</div>
             </div>
           </label>
 
           {/* Direct Debit */}
-          <label className="flex items-center gap-4 p-4 border-2 border-slate-200 rounded-xl cursor-pointer hover:border-blue-300 transition-colors bg-purple-50 border-purple-200">
-            <input 
-              type="checkbox" 
-              checked={directDebit} 
-              onChange={(e) => setDirectDebit(e.target.checked)}
-              className="w-6 h-6 text-purple-600 rounded-md"
-            />
+          <label className="flex items-start gap-4 p-5 border border-zinc-200 rounded-xl cursor-pointer hover:border-zinc-400 transition-colors bg-zinc-50 group">
+            <div className="mt-0.5">
+              <input 
+                type="checkbox" 
+                checked={directDebit} 
+                onChange={(e) => setDirectDebit(e.target.checked)}
+                className="w-5 h-5 text-zinc-900 border-zinc-300 rounded focus:ring-zinc-900 accent-zinc-900"
+              />
+            </div>
             <div>
-              <div className="font-bold text-lg text-purple-900">Set up Direct Debit</div>
-              <div className="text-sm text-purple-700 font-medium">Get DOUBLE tickets on every draw!</div>
+              <div className="font-medium text-zinc-900">Set up Direct Debit</div>
+              <div className="text-sm text-zinc-600 mt-1 font-light">Receive <span className="font-medium">double tickets</span> on every future draw automatically.</div>
             </div>
           </label>
         </div>
 
-        <hr className="my-8 border-slate-200" />
-
-        <div className="bg-slate-100 p-6 rounded-2xl">
-          <div className="flex justify-between text-lg mb-2">
-            <span className="font-bold text-slate-600">Total Tickets You Get:</span>
-            <span className="font-black text-2xl text-green-600">{totalTickets}</span>
+        <div className="mt-12 pt-8 border-t border-zinc-200">
+          <div className="flex justify-between text-base mb-3">
+            <span className="text-zinc-500 font-light">Total tickets allocated</span>
+            <span className="font-medium text-zinc-900">{totalTickets}</span>
           </div>
-          <div className="flex justify-between text-xl">
-            <span className="font-bold text-slate-800">Total Price:</span>
-            <span className="font-black text-3xl">£{totalPrice.toFixed(2)}</span>
+          <div className="flex justify-between items-end mt-6">
+            <span className="text-zinc-500 font-light mb-1">Total due today</span>
+            <span className="font-light tracking-tight text-4xl text-zinc-950">£{totalPrice.toFixed(2)}</span>
           </div>
         </div>
 
         <button 
           onClick={handlePurchase}
           disabled={isSubmitting}
-          className="w-full mt-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-black text-xl shadow-lg disabled:opacity-50 transition-colors"
+          className="w-full mt-10 py-4 bg-zinc-950 hover:bg-zinc-800 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isSubmitting ? 'Processing...' : 'Pay Securely'}
+          {isSubmitting ? 'Processing payment...' : 'Pay securely'}
         </button>
       </div>
     </div>

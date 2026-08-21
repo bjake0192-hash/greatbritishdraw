@@ -20,16 +20,16 @@ export default async function AdminPage() {
 
   if (!auth) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-100">
-        <form action={login} className="bg-white p-8 rounded-xl shadow-lg max-w-sm w-full">
-          <h1 className="text-2xl font-bold mb-6 text-center text-slate-800">Admin Login</h1>
+      <div className="min-h-screen flex items-center justify-center bg-[#fafafa]">
+        <form action={login} className="bg-white p-10 rounded-2xl border border-zinc-200 shadow-sm max-w-sm w-full">
+          <h1 className="text-2xl font-serif mb-8 text-center text-zinc-900">Admin Login</h1>
           <input 
             type="password" 
             name="password" 
             placeholder="Enter Password" 
-            className="w-full p-3 border rounded-lg mb-4 text-slate-800"
+            className="w-full p-3 border-b-2 border-zinc-200 focus:border-zinc-900 focus:outline-none transition-colors bg-transparent rounded-none mb-8 text-zinc-900"
           />
-          <button type="submit" className="w-full bg-blue-600 text-white font-bold p-3 rounded-lg hover:bg-blue-700">
+          <button type="submit" className="w-full bg-zinc-950 text-white font-medium p-3 rounded-lg hover:bg-zinc-800 transition-colors">
             Login
           </button>
         </form>
@@ -52,11 +52,12 @@ export default async function AdminPage() {
   const totalIncome = totalIncomeResult._sum.pricePaid || 0;
 
   return (
-    <div className="min-h-screen bg-slate-50 p-8 text-slate-800">
-      <div className="max-w-5xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-black text-slate-900">Admin Dashboard</h1>
-          <div className="text-xl font-bold bg-green-100 text-green-800 px-4 py-2 rounded-lg">
+    <div className="min-h-screen bg-[#fafafa] p-8 text-zinc-900 font-sans selection:bg-zinc-900 selection:text-white">
+      <div className="max-w-5xl mx-auto py-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
+          <h1 className="text-4xl font-serif text-zinc-950">Admin Dashboard</h1>
+          <div className="text-sm font-medium border border-emerald-200 bg-emerald-50 text-emerald-800 px-4 py-2 rounded-full flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
             Total Income: £{totalIncome.toFixed(2)}
           </div>
         </div>
@@ -68,22 +69,22 @@ export default async function AdminPage() {
             const freeTickets = totalTickets - paidTickets;
 
             return (
-              <div key={draw.id} className="bg-white p-6 rounded-2xl shadow-md border-t-4 border-blue-500">
-                <h2 className="text-2xl font-bold mb-2">{draw.name}</h2>
-                <div className="text-sm text-slate-500 mb-6">Prize: £{draw.prize}</div>
+              <div key={draw.id} className="bg-white p-8 rounded-2xl shadow-sm border border-zinc-200">
+                <h2 className="text-2xl font-serif mb-1 text-zinc-900">{draw.name}</h2>
+                <div className="text-xs font-semibold uppercase tracking-widest text-zinc-400 mb-8">Prize: £{draw.prize}</div>
                 
-                <div className="space-y-3">
-                  <div className="flex justify-between font-medium">
-                    <span className="text-slate-600">Total Tickets in Draw:</span>
-                    <span className="font-bold text-lg">{totalTickets}</span>
+                <div className="space-y-4">
+                  <div className="flex justify-between font-light text-zinc-600">
+                    <span>Total Tickets in Draw</span>
+                    <span className="font-medium text-zinc-900">{totalTickets}</span>
                   </div>
-                  <div className="flex justify-between font-medium">
-                    <span className="text-slate-600">Paid Tickets:</span>
-                    <span className="font-bold text-lg text-blue-600">{paidTickets}</span>
+                  <div className="flex justify-between font-light text-zinc-600">
+                    <span>Paid Tickets</span>
+                    <span className="font-medium text-zinc-900">{paidTickets}</span>
                   </div>
-                  <div className="flex justify-between font-medium">
-                    <span className="text-slate-600">Bonus/Free Tickets:</span>
-                    <span className="font-bold text-lg text-green-600">{freeTickets}</span>
+                  <div className="flex justify-between font-light text-zinc-600">
+                    <span>Bonus/Free Tickets</span>
+                    <span className="font-medium text-emerald-600">{freeTickets}</span>
                   </div>
                 </div>
               </div>
@@ -91,7 +92,7 @@ export default async function AdminPage() {
           })}
           
           {draws.length === 0 && (
-            <div className="col-span-2 text-center text-slate-500 py-12">
+            <div className="col-span-2 text-center text-zinc-500 font-light py-24 bg-white rounded-2xl border border-zinc-200 border-dashed">
               No draws or tickets found yet.
             </div>
           )}
