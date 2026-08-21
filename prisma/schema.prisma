@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  directDebit  Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  tickets      Ticket[]
+}
+
+model Draw {
+  id        String   @id @default(cuid())
+  name      String   // e.g. "Standard Monthly", "Standard Weekly", "High Roller Bi-Monthly", "High Roller Weekly"
+  type      String   // e.g. "STANDARD", "HIGH_ROLLER"
+  frequency String   // e.g. "WEEKLY", "MONTHLY", "BI_MONTHLY"
+  date      DateTime
+  prize     Float
+  tickets   Ticket[]
+  createdAt DateTime @default(now())
+}
+
+model Ticket {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  drawId    String
+  draw      Draw     @relation(fields: [drawId], references: [id])
+  isPaid    Boolean  @default(false)
+  pricePaid Float    @default(0)
+  createdAt DateTime @default(now())
+}
