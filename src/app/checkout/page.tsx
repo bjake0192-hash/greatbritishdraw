@@ -54,65 +54,68 @@ function CheckoutContent() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto py-16 px-6 w-full flex-1">
+    <div className="max-w-4xl mx-auto py-16 px-6 w-full flex-1">
       <div className="mb-12">
-        <Link href="/" className="text-xs uppercase tracking-widest text-zinc-400 hover:text-zinc-900 transition-colors">← Return to draws</Link>
-        <h1 className="text-4xl md:text-5xl font-serif mt-8 text-zinc-900 tracking-tight">
-          {isHighRoller ? 'High Roller Edition' : 'Monthly Edition'}
+        <Link href="/" className="text-xs font-bold uppercase tracking-widest text-pink-500 hover:text-pink-600 transition-colors">← Return to draws</Link>
+        <h1 className="text-4xl md:text-5xl font-serif mt-6 text-zinc-900 tracking-tight">
+          {isHighRoller ? 'High Roller VIP Entry' : 'Standard Monthly Entry'}
         </h1>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-12 lg:gap-16">
-        <div className="md:col-span-2 space-y-12">
+      <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+        <div className="md:col-span-2 space-y-8">
           {/* Allocation */}
-          <section>
-            <h2 className="text-xs uppercase tracking-[0.2em] text-zinc-500 mb-6 border-b border-zinc-200 pb-3 font-semibold">Allocation</h2>
+          <section className="bg-white p-8 rounded-3xl shadow-lg border border-zinc-100 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-pink-500"></div>
+            <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 mb-6 pb-3 border-b border-zinc-100">Ticket Allocation</h2>
             <div className="flex items-center justify-between group">
-              <span className="text-zinc-600 font-light">Number of entries</span>
+              <span className="text-zinc-700 font-medium">Number of entries</span>
               <input 
                 type="number" 
                 min="1" 
                 value={ticketCount} 
                 onChange={(e) => setTicketCount(Math.max(1, parseInt(e.target.value) || 1))}
-                className="w-24 border-b border-zinc-300 py-2 text-center text-2xl font-serif text-zinc-900 focus:outline-none focus:border-zinc-900 bg-transparent transition-colors"
+                className="w-24 border-b-2 border-zinc-200 py-2 text-center text-3xl font-serif text-zinc-900 focus:outline-none focus:border-pink-500 bg-transparent transition-colors"
               />
             </div>
             {isBuy10Offer && (
-              <p className="text-xs text-zinc-500 mt-4 italic tracking-wide">Volume perk applied: allocation doubled.</p>
+              <div className="mt-6 bg-pink-50 border border-pink-100 text-pink-700 p-4 rounded-xl text-sm font-bold flex items-center gap-3">
+                <span className="text-xl">🎉</span> Volume perk applied: allocation doubled!
+              </div>
             )}
           </section>
 
           {/* Enhancements */}
-          <section>
-            <h2 className="text-xs uppercase tracking-[0.2em] text-zinc-500 mb-6 border-b border-zinc-200 pb-3 font-semibold">Enhancements</h2>
-            <div className="space-y-6">
-              <label className="flex items-start gap-4 cursor-pointer group">
-                <div className="mt-1 flex items-center justify-center w-5 h-5 border border-zinc-300 rounded-sm group-hover:border-zinc-900 transition-colors">
+          <section className="bg-white p-8 rounded-3xl shadow-lg border border-zinc-100">
+            <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 mb-6 pb-3 border-b border-zinc-100">Enhancements</h2>
+            <div className="space-y-4">
+              <label className="flex items-start gap-4 cursor-pointer group p-4 rounded-2xl border border-zinc-100 hover:border-blue-200 hover:bg-blue-50/50 transition-all">
+                <div className="mt-1 flex items-center justify-center w-6 h-6 border-2 border-zinc-300 rounded-md group-hover:border-blue-500 transition-colors">
                   <input 
                     type="checkbox" 
                     checked={addWeekly} 
                     onChange={(e) => setAddWeekly(e.target.checked)}
-                    className="w-3 h-3 text-zinc-900 border-none rounded-none focus:ring-0 accent-zinc-900 cursor-pointer"
+                    className="w-4 h-4 text-blue-500 border-none rounded-sm focus:ring-0 accent-blue-500 cursor-pointer"
                   />
                 </div>
                 <div>
-                  <div className="font-medium text-zinc-900 tracking-wide">Include Weekly Draw (+£0.50/entry)</div>
-                  <div className="text-sm text-zinc-500 font-light mt-1">Enter the weekly draw for a chance to win {isHighRoller ? '£1,500' : '£500'}.</div>
+                  <div className="font-bold text-zinc-900 tracking-wide text-lg">Include Weekly Draw (+£0.50)</div>
+                  <div className="text-sm text-zinc-500 font-medium mt-1">Enter the weekly draw for a chance to win {isHighRoller ? '£1,500' : '£500'}.</div>
                 </div>
               </label>
 
-              <label className="flex items-start gap-4 cursor-pointer group">
-                <div className="mt-1 flex items-center justify-center w-5 h-5 border border-zinc-300 rounded-sm group-hover:border-zinc-900 transition-colors">
+              <label className="flex items-start gap-4 cursor-pointer group p-4 rounded-2xl border border-zinc-100 hover:border-yellow-300 hover:bg-yellow-50/50 transition-all">
+                <div className="mt-1 flex items-center justify-center w-6 h-6 border-2 border-zinc-300 rounded-md group-hover:border-yellow-500 transition-colors">
                   <input 
                     type="checkbox" 
                     checked={directDebit} 
                     onChange={(e) => setDirectDebit(e.target.checked)}
-                    className="w-3 h-3 text-zinc-900 border-none rounded-none focus:ring-0 accent-zinc-900 cursor-pointer"
+                    className="w-4 h-4 text-yellow-500 border-none rounded-sm focus:ring-0 accent-yellow-500 cursor-pointer"
                   />
                 </div>
                 <div>
-                  <div className="font-medium text-zinc-900 tracking-wide">Direct Debit Subscription</div>
-                  <div className="text-sm text-zinc-500 font-light mt-1">Receive double entries on every future draw automatically.</div>
+                  <div className="font-bold text-zinc-900 tracking-wide text-lg">Direct Debit Subscription</div>
+                  <div className="text-sm text-zinc-500 font-medium mt-1">Receive double entries on every future draw automatically.</div>
                 </div>
               </label>
             </div>
@@ -121,37 +124,39 @@ function CheckoutContent() {
 
         {/* Summary */}
         <div className="md:col-span-1">
-          <div className="bg-white border border-zinc-200 p-8 sticky top-24 shadow-sm">
-            <h3 className="text-xs uppercase tracking-[0.2em] text-zinc-500 mb-6 border-b border-zinc-200 pb-3 font-semibold">Summary</h3>
+          <div className="bg-zinc-900 text-white p-8 rounded-3xl sticky top-24 shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-pink-500/20 to-transparent rounded-bl-full"></div>
             
-            <div className="space-y-4 text-sm font-light text-zinc-600 mb-8">
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 mb-6 pb-3 border-b border-zinc-800 relative z-10">Order Summary</h3>
+            
+            <div className="space-y-4 text-sm font-medium text-zinc-300 mb-8 relative z-10">
               <div className="flex justify-between">
                 <span>Base ({ticketCount})</span>
-                <span>£{(ticketCount * basePrice).toFixed(2)}</span>
+                <span className="text-white">£{(ticketCount * basePrice).toFixed(2)}</span>
               </div>
               {addWeekly && (
                 <div className="flex justify-between">
                   <span>Weekly</span>
-                  <span>£{(ticketCount * weeklyAddOnPrice).toFixed(2)}</span>
+                  <span className="text-white">£{(ticketCount * weeklyAddOnPrice).toFixed(2)}</span>
                 </div>
               )}
-              <div className="flex justify-between pt-4 border-t border-zinc-100 text-zinc-900">
+              <div className="flex justify-between pt-4 border-t border-zinc-800 text-yellow-400">
                 <span>Total Entries</span>
-                <span className="font-medium text-lg">{totalTickets}</span>
+                <span className="font-bold text-lg">{totalTickets}</span>
               </div>
             </div>
 
-            <div className="flex justify-between items-end mb-8">
-              <span className="text-sm font-medium text-zinc-900 uppercase tracking-widest">Total</span>
-              <span className="text-3xl font-serif text-zinc-900 tracking-tight">£{totalPrice.toFixed(2)}</span>
+            <div className="flex justify-between items-end mb-8 relative z-10">
+              <span className="text-sm font-bold text-zinc-400 uppercase tracking-widest">Total</span>
+              <span className="text-4xl font-serif text-white tracking-tight">£{totalPrice.toFixed(2)}</span>
             </div>
 
             <button 
               onClick={handlePurchase}
               disabled={isSubmitting}
-              className="w-full py-4 border border-zinc-900 bg-zinc-900 text-white text-xs uppercase tracking-[0.15em] hover:bg-transparent hover:text-zinc-900 transition-colors duration-300 disabled:opacity-50 disabled:hover:bg-zinc-900 disabled:hover:text-white"
+              className="relative z-10 w-full py-4 rounded-xl bg-gradient-to-r from-pink-500 to-red-500 text-white text-sm font-bold uppercase tracking-widest hover:shadow-lg hover:shadow-pink-500/40 transition-all duration-300 disabled:opacity-50"
             >
-              {isSubmitting ? 'Processing...' : 'Confirm Entry'}
+              {isSubmitting ? 'Processing...' : 'Secure Entry'}
             </button>
           </div>
         </div>
