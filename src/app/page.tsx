@@ -5,31 +5,31 @@ export default function Home() {
   return (
     <div className="w-full max-w-6xl mx-auto px-4 py-8 md:py-16">
       {/* Hero Section */}
-      <div className="bg-white rounded-3xl border-4 border-slate-900 p-6 md:p-12 mb-16 shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] flex flex-col md:flex-row items-center gap-8">
+      <div className="bg-white rounded-3xl border-4 border-slate-900 p-6 md:p-8 lg:p-10 mb-12 lg:mb-16 shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] flex flex-col md:flex-row items-center gap-6 lg:gap-10">
         <div className="flex-1 text-center md:text-left">
-          <div className="inline-block bg-green-400 text-slate-900 font-bold px-4 py-1.5 rounded-full border-2 border-slate-900 mb-6 transform -rotate-2 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)]">
+          <div className="inline-block bg-green-400 text-slate-900 font-bold px-3 py-1.5 rounded-full border-2 border-slate-900 mb-4 transform -rotate-2 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] text-sm">
             Tickets from just £1!
           </div>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold mb-6 text-slate-900 leading-[1.1]">
-            Win Massive <br />
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 text-slate-900 leading-[1.1]">
+            Win Massive <br className="hidden md:block" />
             <span className="text-sky-500">Cash Prizes!</span>
           </h1>
-          <p className="text-lg text-slate-600 font-bold mb-8 max-w-md mx-auto md:mx-0">
+          <p className="text-base md:text-lg text-slate-600 font-bold mb-6 max-w-md mx-auto md:mx-0">
             The most fun, affordable prize draws in the UK. Next draw takes place on the last day of the month at 10am!
           </p>
           
-          <div className="bg-yellow-300 border-4 border-slate-900 p-4 rounded-2xl inline-block shadow-[4px_4px_0px_0px_rgba(15,23,42,1)] text-center transform hover:scale-105 transition-transform">
-            <span className="block text-sm font-black uppercase tracking-widest text-slate-800 mb-2">Draw Closes In:</span>
-            <div className="text-3xl font-heading font-bold text-slate-900">
+          <div className="bg-yellow-300 border-4 border-slate-900 p-3 lg:p-4 rounded-2xl inline-block shadow-[4px_4px_0px_0px_rgba(15,23,42,1)] text-center transform hover:scale-105 transition-transform">
+            <span className="block text-xs lg:text-sm font-black uppercase tracking-widest text-slate-800 mb-1 lg:mb-2">Draw Closes In:</span>
+            <div className="text-2xl lg:text-3xl font-heading font-bold text-slate-900">
               <Countdown />
             </div>
           </div>
         </div>
         
-        <div className="flex-1 w-full relative mt-8 md:mt-0">
-           <div className="rounded-3xl overflow-hidden border-4 border-slate-900 shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] bg-sky-200 transform rotate-2 hover:rotate-0 transition-transform duration-300">
+        <div className="flex-1 w-full relative mt-6 md:mt-0 flex justify-center">
+           <div className="w-full max-w-[28rem] rounded-3xl overflow-hidden border-4 border-slate-900 shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] bg-sky-200 transform rotate-2 hover:rotate-0 transition-transform duration-300 aspect-[4/3] sm:aspect-video md:aspect-[4/3]">
              {/* Realistic relatable image prompt */}
-             <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=realistic%20photography%20of%20cheerful%20everyday%20british%20people%20celebrating%20with%20confetti%20bright%20sunny%20vibrant%20fun&image_size=landscape_4_3" alt="Happy Winners" className="w-full h-auto object-cover" />
+             <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=realistic%20photography%20of%20cheerful%20everyday%20british%20people%20celebrating%20with%20confetti%20bright%20sunny%20vibrant%20fun&image_size=landscape_4_3" alt="Happy Winners" className="w-full h-full object-cover" />
            </div>
         </div>
       </div>
