@@ -44,7 +44,7 @@ function CheckoutContent() {
           totalPrice
         })
       });
-      alert('Purchase successful! Good luck!');
+      alert('Order placed successfully! Thank you.');
       window.location.href = '/';
     } catch (e) {
       alert('Purchase failed.');
@@ -54,91 +54,108 @@ function CheckoutContent() {
   };
 
   return (
-    <div className="min-h-screen py-12 md:py-24 px-6 text-slate-900">
-      <div className="max-w-xl mx-auto bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] relative overflow-hidden">
-        
-        {/* Ticket Header */}
-        <div className={`p-8 md:p-12 text-white ${isHighRoller ? 'bg-slate-900' : 'bg-blue-600'}`}>
-          <div className="flex justify-between items-center mb-2">
-            <h1 className="text-3xl md:text-4xl font-serif font-black">
-              {isHighRoller ? 'High Roller' : 'Monthly Draw'}
-            </h1>
-            <Link href="/" className="text-sm font-bold opacity-80 hover:opacity-100 transition-opacity">Cancel</Link>
-          </div>
-          <p className="font-medium opacity-90">Admit One (or twenty!)</p>
-        </div>
+    <div className="max-w-[1000px] mx-auto py-8 px-4 w-full">
+      <div className="mb-6 flex items-center justify-between">
+        <h1 className="text-3xl font-medium">Checkout ({ticketCount} items)</h1>
+        <Link href="/" className="text-[#007185] hover:text-[#c45500] hover:underline text-sm">Cancel & Return to Basket</Link>
+      </div>
 
-        {/* Ticket Body */}
-        <div className="p-8 md:p-12">
-          <div className="space-y-8">
-            {/* Ticket Count */}
-            <div>
-              <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Number of tickets</label>
-              <input 
-                type="number" 
-                min="1" 
-                value={ticketCount} 
-                onChange={(e) => setTicketCount(Math.max(1, parseInt(e.target.value) || 1))}
-                className="w-full text-4xl font-black p-4 border-b-4 border-slate-200 focus:border-amber-400 focus:outline-none transition-colors bg-transparent rounded-none"
-              />
-              {isBuy10Offer && (
-                <p className="text-amber-600 font-bold mt-3 text-sm flex items-center gap-2">
-                  🎪 Volume offer applied: Tickets doubled!
-                </p>
-              )}
+      <div className="flex flex-col lg:flex-row gap-6">
+        {/* Left Column: Configuration */}
+        <div className="flex-1 space-y-4">
+          <div className="bg-white p-6 rounded shadow-sm border border-gray-200">
+            <h2 className="text-xl font-bold mb-4">1. Configure your tickets</h2>
+            
+            <div className="mb-6 pb-6 border-b border-gray-200">
+              <label className="block text-sm font-bold mb-2">Quantity</label>
+              <div className="flex items-center gap-4">
+                <input 
+                  type="number" 
+                  min="1" 
+                  value={ticketCount} 
+                  onChange={(e) => setTicketCount(Math.max(1, parseInt(e.target.value) || 1))}
+                  className="w-24 p-2 border border-gray-300 rounded shadow-inner text-lg focus:border-[#e77600] focus:ring-1 focus:ring-[#e77600] outline-none"
+                />
+                {isBuy10Offer && (
+                  <span className="text-green-700 font-bold text-sm bg-green-50 px-2 py-1 border border-green-200 rounded">Volume Offer Applied: Tickets Doubled</span>
+                )}
+              </div>
             </div>
 
-            {/* Add Weekly */}
-            <label className="flex items-start gap-4 p-5 border-2 border-slate-200 rounded-2xl cursor-pointer hover:border-amber-400 transition-colors group">
-              <div className="mt-0.5">
+            <h2 className="text-xl font-bold mb-4">2. Additional Options</h2>
+            <div className="space-y-4">
+              <label className="flex items-start gap-3 p-4 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">
                 <input 
                   type="checkbox" 
                   checked={addWeekly} 
                   onChange={(e) => setAddWeekly(e.target.checked)}
-                  className="w-6 h-6 text-amber-500 border-slate-300 rounded focus:ring-amber-500 accent-amber-500"
+                  className="mt-1 w-4 h-4 text-[#e77600] border-gray-300 rounded focus:ring-[#e77600]"
                 />
-              </div>
-              <div>
-                <div className="font-bold text-slate-900 text-lg">Include Weekly Draw (+50p)</div>
-                <div className="text-sm text-slate-600 mt-1 font-medium">Enter the weekly draw for a chance to win {isHighRoller ? '£1,500' : '£500'}.</div>
-              </div>
-            </label>
+                <div>
+                  <div className="font-bold">Include Weekly Draw (+£0.50 per ticket)</div>
+                  <div className="text-sm text-gray-600">Enter the weekly draw for a chance to win {isHighRoller ? '£1,500' : '£500'}.</div>
+                </div>
+              </label>
 
-            {/* Direct Debit */}
-            <label className="flex items-start gap-4 p-5 border-2 border-slate-200 rounded-2xl cursor-pointer hover:border-amber-400 transition-colors bg-slate-50 group">
-              <div className="mt-0.5">
+              <label className="flex items-start gap-3 p-4 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">
                 <input 
                   type="checkbox" 
                   checked={directDebit} 
                   onChange={(e) => setDirectDebit(e.target.checked)}
-                  className="w-6 h-6 text-amber-500 border-slate-300 rounded focus:ring-amber-500 accent-amber-500"
+                  className="mt-1 w-4 h-4 text-[#e77600] border-gray-300 rounded focus:ring-[#e77600]"
                 />
-              </div>
-              <div>
-                <div className="font-bold text-slate-900 text-lg">Set up Direct Debit</div>
-                <div className="text-sm text-slate-600 mt-1 font-medium">Receive <span className="font-bold text-amber-600">double tickets</span> on every future draw automatically.</div>
-              </div>
-            </label>
-          </div>
-
-          <div className="mt-12 pt-8 border-t-4 border-dashed border-slate-200">
-            <div className="flex justify-between text-lg mb-2 font-bold">
-              <span className="text-slate-500">Total tickets allocated</span>
-              <span className="text-slate-900">{totalTickets}</span>
-            </div>
-            <div className="flex justify-between items-end mt-4">
-              <span className="text-slate-500 font-bold mb-1">Total due today</span>
-              <span className="font-black tracking-tight text-5xl text-slate-900">£{totalPrice.toFixed(2)}</span>
+                <div>
+                  <div className="font-bold">Subscribe with Direct Debit</div>
+                  <div className="text-sm text-gray-600">Receive double tickets on every future draw automatically. Cancel anytime.</div>
+                </div>
+              </label>
             </div>
           </div>
+        </div>
 
-          <button 
-            onClick={handlePurchase}
-            disabled={isSubmitting}
-            className={`w-full mt-10 py-5 text-white rounded-2xl font-black text-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed ${isHighRoller ? 'bg-red-600 hover:bg-red-700 shadow-red-900/30' : 'bg-blue-600 hover:bg-blue-700 shadow-blue-900/30'}`}
-          >
-            {isSubmitting ? 'Processing...' : 'Pay Securely'}
-          </button>
+        {/* Right Column: Order Summary */}
+        <div className="w-full lg:w-80">
+          <div className="bg-white p-5 rounded shadow-sm border border-gray-200 mb-4 sticky top-4">
+            <button 
+              onClick={handlePurchase}
+              disabled={isSubmitting}
+              className="w-full bg-[#ffd814] hover:bg-[#f7ca00] border border-[#fcd200] text-black font-medium py-2 rounded-full shadow-sm mb-4 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? 'Processing...' : 'Place your order'}
+            </button>
+            
+            <div className="text-center text-xs text-gray-600 mb-4 pb-4 border-b border-gray-200">
+              By placing your order, you agree to our <span className="text-[#007185] hover:underline cursor-pointer">privacy notice</span> and <span className="text-[#007185] hover:underline cursor-pointer">conditions of use</span>.
+            </div>
+
+            <h3 className="font-bold text-lg mb-2">Order Summary</h3>
+            <div className="space-y-1 text-sm mb-4 pb-4 border-b border-gray-200">
+              <div className="flex justify-between">
+                <span>Items ({ticketCount}):</span>
+                <span>£{(ticketCount * basePrice).toFixed(2)}</span>
+              </div>
+              {addWeekly && (
+                <div className="flex justify-between">
+                  <span>Weekly Add-on:</span>
+                  <span>£{(ticketCount * weeklyAddOnPrice).toFixed(2)}</span>
+                </div>
+              )}
+              <div className="flex justify-between text-green-700">
+                <span>Total Tickets Granted:</span>
+                <span className="font-bold">{totalTickets}</span>
+              </div>
+            </div>
+
+            <div className="flex justify-between font-bold text-xl text-red-700 mb-4">
+              <span>Order Total:</span>
+              <span>£{totalPrice.toFixed(2)}</span>
+            </div>
+
+            <div className="bg-gray-100 p-3 rounded text-xs text-gray-600">
+              <span className="font-bold text-gray-800">Secure Checkout</span><br/>
+              Your transaction is encrypted and securely processed.
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -147,7 +164,7 @@ function CheckoutContent() {
 
 export default function CheckoutPage() {
   return (
-    <Suspense fallback={<div className="p-8 text-center font-bold">Loading...</div>}>
+    <Suspense fallback={<div className="p-8 text-center font-bold">Loading checkout...</div>}>
       <CheckoutContent />
     </Suspense>
   );
