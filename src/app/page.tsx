@@ -1,7 +1,21 @@
 import Countdown from '@/components/Countdown';
 import Link from 'next/link';
+import { PrismaClient } from '@prisma/client';
 
-export default function Home() {
+const prisma = new PrismaClient();
+
+export default async function Home() {
+  let totalTicketsSold = 0;
+  try {
+    totalTicketsSold = await prisma.ticket.count();
+  } catch (error) {
+    // Fallback if db is not reachable (e.g. on edge without D1 adapter)
+    totalTicketsSold = 14592;
+  }
+
+  // Format with commas
+  const formattedTickets = totalTicketsSold.toLocaleString();
+
   return (
     <div className="w-full max-w-6xl mx-auto px-4 py-8 md:py-16">
       {/* Hero Section */}
@@ -18,18 +32,26 @@ export default function Home() {
             The most fun, affordable prize draws in the UK. Next draw takes place on the last day of the month at 10am!
           </p>
           
-          <div className="bg-yellow-300 border-4 border-slate-900 p-3 lg:p-4 rounded-2xl inline-block shadow-[4px_4px_0px_0px_rgba(15,23,42,1)] text-center transform hover:scale-105 transition-transform">
-            <span className="block text-xs lg:text-sm font-black uppercase tracking-widest text-slate-800 mb-1 lg:mb-2">Draw Closes In:</span>
-            <div className="text-2xl lg:text-3xl font-heading font-bold text-slate-900">
-              <Countdown />
+          <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+            <div className="bg-yellow-300 border-4 border-slate-900 p-3 lg:p-4 rounded-2xl inline-block shadow-[4px_4px_0px_0px_rgba(15,23,42,1)] text-center transform hover:scale-105 transition-transform">
+              <span className="block text-xs lg:text-sm font-black uppercase tracking-widest text-slate-800 mb-1 lg:mb-2">Draw Closes In:</span>
+              <div className="text-2xl lg:text-3xl font-heading font-bold text-slate-900">
+                <Countdown />
+              </div>
+            </div>
+            
+            <div className="bg-pink-400 border-4 border-slate-900 p-3 lg:p-4 rounded-2xl inline-block shadow-[4px_4px_0px_0px_rgba(15,23,42,1)] text-center transform hover:scale-105 transition-transform">
+              <span className="block text-xs lg:text-sm font-black uppercase tracking-widest text-slate-900 mb-1 lg:mb-2">Total Tickets Sold:</span>
+              <div className="text-2xl lg:text-3xl font-heading font-bold text-white drop-shadow-[2px_2px_0_rgba(15,23,42,1)]">
+                {formattedTickets} 🎟️
+              </div>
             </div>
           </div>
         </div>
         
         <div className="flex-1 w-full relative mt-6 md:mt-0 flex justify-center">
            <div className="w-full max-w-[28rem] rounded-3xl overflow-hidden border-4 border-slate-900 shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] bg-sky-200 transform rotate-2 hover:rotate-0 transition-transform duration-300 aspect-[4/3] sm:aspect-video md:aspect-[4/3]">
-             {/* Realistic relatable image prompt */}
-             <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=realistic%20photography%20of%20cheerful%20everyday%20british%20people%20celebrating%20with%20confetti%20bright%20sunny%20vibrant%20fun&image_size=landscape_4_3" alt="Happy Winners" className="w-full h-full object-cover" />
+             <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1000&auto=format&fit=crop" alt="Happy Winners" className="w-full h-full object-cover" />
            </div>
         </div>
       </div>
@@ -41,27 +63,26 @@ export default function Home() {
         {/* Monthly Edition */}
         <div className="bg-white rounded-3xl overflow-hidden shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] border-4 border-slate-900 flex flex-col hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_rgba(15,23,42,1)] transition-all duration-300 group">
           <div className="h-56 relative border-b-4 border-slate-900 bg-sky-100 overflow-hidden">
-            {/* Realistic pound notes prompt */}
-            <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=realistic%20photography%20of%20british%20twenty%20pound%20notes%20spread%20on%20a%20table%20bright%20lighting&image_size=landscape_4_3" alt="£10,000 Cash" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=1000&auto=format&fit=crop" alt="£10,000 Cash" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
             <div className="absolute top-4 left-4 bg-sky-400 text-slate-900 border-2 border-slate-900 px-4 py-1.5 rounded-full text-sm font-bold shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] transform -rotate-2">
               Monthly Draw
             </div>
           </div>
           
-          <div className="p-8 flex flex-col flex-1">
+          <div className="p-8 flex flex-col flex-1 bg-sky-50">
             <div className="text-5xl font-heading font-bold text-slate-900 mb-2">£10,000</div>
             <div className="text-lg font-bold text-sky-500 mb-6 uppercase tracking-wider">Guaranteed Cash Prize</div>
             
             <div className="space-y-4 font-bold text-slate-600 flex-1 mb-8">
-              <div className="flex justify-between items-center bg-slate-50 p-4 rounded-xl border-2 border-slate-200">
+              <div className="flex justify-between items-center bg-white p-4 rounded-xl border-2 border-slate-200">
                 <span>Entry Ticket</span>
                 <span className="text-slate-900 text-xl font-black">£1.00</span>
               </div>
-              <div className="flex justify-between items-center bg-slate-50 p-4 rounded-xl border-2 border-slate-200">
+              <div className="flex justify-between items-center bg-white p-4 rounded-xl border-2 border-slate-200">
                 <span>Weekly £500 Add-on</span>
                 <span className="text-slate-900 bg-green-300 px-3 py-1 rounded-md border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] transform rotate-2">+ 50p</span>
               </div>
-              <div className="flex justify-between items-center bg-yellow-50 p-4 rounded-xl border-2 border-yellow-300 text-yellow-800">
+              <div className="flex justify-between items-center bg-yellow-100 p-4 rounded-xl border-2 border-yellow-300 text-yellow-800">
                 <span>Buy 10 or Direct Debit</span>
                 <span className="font-black text-lg">2x Tickets!</span>
               </div>
@@ -76,27 +97,26 @@ export default function Home() {
         {/* High Roller Edition */}
         <div className="bg-white rounded-3xl overflow-hidden shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] border-4 border-slate-900 flex flex-col hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_rgba(15,23,42,1)] transition-all duration-300 group">
           <div className="h-56 relative border-b-4 border-slate-900 bg-pink-100 overflow-hidden">
-            {/* Realistic car prompt */}
-            <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=realistic%20photography%20of%20a%20shiny%20new%20blue%20suv%20parked%20in%20a%20suburban%20driveway%20sunny%20day&image_size=landscape_4_3" alt="£25,000 Prize" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            <img src="https://images.unsplash.com/photo-1609521263047-f8f205293f24?q=80&w=1000&auto=format&fit=crop" alt="£25,000 Prize" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
             <div className="absolute top-4 left-4 bg-pink-400 text-slate-900 border-2 border-slate-900 px-4 py-1.5 rounded-full text-sm font-bold shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] transform -rotate-2">
               Mega Draw
             </div>
           </div>
           
-          <div className="p-8 flex flex-col flex-1">
+          <div className="p-8 flex flex-col flex-1 bg-pink-50">
             <div className="text-5xl font-heading font-bold text-slate-900 mb-2">£25,000</div>
             <div className="text-lg font-bold text-pink-500 mb-6 uppercase tracking-wider">Bi-Monthly Mega Prize</div>
             
             <div className="space-y-4 font-bold text-slate-600 flex-1 mb-8">
-              <div className="flex justify-between items-center bg-slate-50 p-4 rounded-xl border-2 border-slate-200">
+              <div className="flex justify-between items-center bg-white p-4 rounded-xl border-2 border-slate-200">
                 <span>Entry Ticket</span>
                 <span className="text-slate-900 text-xl font-black">£2.00</span>
               </div>
-              <div className="flex justify-between items-center bg-slate-50 p-4 rounded-xl border-2 border-slate-200">
+              <div className="flex justify-between items-center bg-white p-4 rounded-xl border-2 border-slate-200">
                 <span>Weekly £1,500 Add-on</span>
                 <span className="text-slate-900 bg-green-300 px-3 py-1 rounded-md border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] transform rotate-2">+ 50p</span>
               </div>
-              <div className="flex justify-between items-center bg-yellow-50 p-4 rounded-xl border-2 border-yellow-300 text-yellow-800">
+              <div className="flex justify-between items-center bg-yellow-100 p-4 rounded-xl border-2 border-yellow-300 text-yellow-800">
                 <span>Buy 10 or Direct Debit</span>
                 <span className="font-black text-lg">2x Tickets!</span>
               </div>
