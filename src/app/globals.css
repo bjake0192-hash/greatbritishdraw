@@ -3,11 +3,12 @@
 @theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-playfair);
 }
 
 :root {
-  --background: #f3f4f6; /* Light gray like Amazon's background */
-  --foreground: #0f1111; /* Amazon's dark text */
+  --background: #fdfbf7;
+  --foreground: #1c1917;
 }
 
 body {

@@ -44,117 +44,115 @@ function CheckoutContent() {
           totalPrice
         })
       });
-      alert('Order placed successfully! Thank you.');
+      alert('Entry secured successfully. Best of luck.');
       window.location.href = '/';
     } catch (e) {
-      alert('Purchase failed.');
+      alert('Transaction failed.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="max-w-[1000px] mx-auto py-8 px-4 w-full">
-      <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-3xl font-medium">Checkout ({ticketCount} items)</h1>
-        <Link href="/" className="text-[#007185] hover:text-[#c45500] hover:underline text-sm">Cancel & Return to Basket</Link>
+    <div className="max-w-3xl mx-auto py-16 px-6 w-full flex-1">
+      <div className="mb-12">
+        <Link href="/" className="text-xs uppercase tracking-widest text-zinc-400 hover:text-zinc-900 transition-colors">← Return to draws</Link>
+        <h1 className="text-4xl md:text-5xl font-serif mt-8 text-zinc-900 tracking-tight">
+          {isHighRoller ? 'High Roller Edition' : 'Monthly Edition'}
+        </h1>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-6">
-        {/* Left Column: Configuration */}
-        <div className="flex-1 space-y-4">
-          <div className="bg-white p-6 rounded shadow-sm border border-gray-200">
-            <h2 className="text-xl font-bold mb-4">1. Configure your tickets</h2>
-            
-            <div className="mb-6 pb-6 border-b border-gray-200">
-              <label className="block text-sm font-bold mb-2">Quantity</label>
-              <div className="flex items-center gap-4">
-                <input 
-                  type="number" 
-                  min="1" 
-                  value={ticketCount} 
-                  onChange={(e) => setTicketCount(Math.max(1, parseInt(e.target.value) || 1))}
-                  className="w-24 p-2 border border-gray-300 rounded shadow-inner text-lg focus:border-[#e77600] focus:ring-1 focus:ring-[#e77600] outline-none"
-                />
-                {isBuy10Offer && (
-                  <span className="text-green-700 font-bold text-sm bg-green-50 px-2 py-1 border border-green-200 rounded">Volume Offer Applied: Tickets Doubled</span>
-                )}
-              </div>
+      <div className="grid md:grid-cols-3 gap-12 lg:gap-16">
+        <div className="md:col-span-2 space-y-12">
+          {/* Allocation */}
+          <section>
+            <h2 className="text-xs uppercase tracking-[0.2em] text-zinc-500 mb-6 border-b border-zinc-200 pb-3 font-semibold">Allocation</h2>
+            <div className="flex items-center justify-between group">
+              <span className="text-zinc-600 font-light">Number of entries</span>
+              <input 
+                type="number" 
+                min="1" 
+                value={ticketCount} 
+                onChange={(e) => setTicketCount(Math.max(1, parseInt(e.target.value) || 1))}
+                className="w-24 border-b border-zinc-300 py-2 text-center text-2xl font-serif text-zinc-900 focus:outline-none focus:border-zinc-900 bg-transparent transition-colors"
+              />
             </div>
+            {isBuy10Offer && (
+              <p className="text-xs text-zinc-500 mt-4 italic tracking-wide">Volume perk applied: allocation doubled.</p>
+            )}
+          </section>
 
-            <h2 className="text-xl font-bold mb-4">2. Additional Options</h2>
-            <div className="space-y-4">
-              <label className="flex items-start gap-3 p-4 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">
-                <input 
-                  type="checkbox" 
-                  checked={addWeekly} 
-                  onChange={(e) => setAddWeekly(e.target.checked)}
-                  className="mt-1 w-4 h-4 text-[#e77600] border-gray-300 rounded focus:ring-[#e77600]"
-                />
+          {/* Enhancements */}
+          <section>
+            <h2 className="text-xs uppercase tracking-[0.2em] text-zinc-500 mb-6 border-b border-zinc-200 pb-3 font-semibold">Enhancements</h2>
+            <div className="space-y-6">
+              <label className="flex items-start gap-4 cursor-pointer group">
+                <div className="mt-1 flex items-center justify-center w-5 h-5 border border-zinc-300 rounded-sm group-hover:border-zinc-900 transition-colors">
+                  <input 
+                    type="checkbox" 
+                    checked={addWeekly} 
+                    onChange={(e) => setAddWeekly(e.target.checked)}
+                    className="w-3 h-3 text-zinc-900 border-none rounded-none focus:ring-0 accent-zinc-900 cursor-pointer"
+                  />
+                </div>
                 <div>
-                  <div className="font-bold">Include Weekly Draw (+£0.50 per ticket)</div>
-                  <div className="text-sm text-gray-600">Enter the weekly draw for a chance to win {isHighRoller ? '£1,500' : '£500'}.</div>
+                  <div className="font-medium text-zinc-900 tracking-wide">Include Weekly Draw (+£0.50/entry)</div>
+                  <div className="text-sm text-zinc-500 font-light mt-1">Enter the weekly draw for a chance to win {isHighRoller ? '£1,500' : '£500'}.</div>
                 </div>
               </label>
 
-              <label className="flex items-start gap-3 p-4 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">
-                <input 
-                  type="checkbox" 
-                  checked={directDebit} 
-                  onChange={(e) => setDirectDebit(e.target.checked)}
-                  className="mt-1 w-4 h-4 text-[#e77600] border-gray-300 rounded focus:ring-[#e77600]"
-                />
+              <label className="flex items-start gap-4 cursor-pointer group">
+                <div className="mt-1 flex items-center justify-center w-5 h-5 border border-zinc-300 rounded-sm group-hover:border-zinc-900 transition-colors">
+                  <input 
+                    type="checkbox" 
+                    checked={directDebit} 
+                    onChange={(e) => setDirectDebit(e.target.checked)}
+                    className="w-3 h-3 text-zinc-900 border-none rounded-none focus:ring-0 accent-zinc-900 cursor-pointer"
+                  />
+                </div>
                 <div>
-                  <div className="font-bold">Subscribe with Direct Debit</div>
-                  <div className="text-sm text-gray-600">Receive double tickets on every future draw automatically. Cancel anytime.</div>
+                  <div className="font-medium text-zinc-900 tracking-wide">Direct Debit Subscription</div>
+                  <div className="text-sm text-zinc-500 font-light mt-1">Receive double entries on every future draw automatically.</div>
                 </div>
               </label>
             </div>
-          </div>
+          </section>
         </div>
 
-        {/* Right Column: Order Summary */}
-        <div className="w-full lg:w-80">
-          <div className="bg-white p-5 rounded shadow-sm border border-gray-200 mb-4 sticky top-4">
-            <button 
-              onClick={handlePurchase}
-              disabled={isSubmitting}
-              className="w-full bg-[#ffd814] hover:bg-[#f7ca00] border border-[#fcd200] text-black font-medium py-2 rounded-full shadow-sm mb-4 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isSubmitting ? 'Processing...' : 'Place your order'}
-            </button>
+        {/* Summary */}
+        <div className="md:col-span-1">
+          <div className="bg-white border border-zinc-200 p-8 sticky top-24 shadow-sm">
+            <h3 className="text-xs uppercase tracking-[0.2em] text-zinc-500 mb-6 border-b border-zinc-200 pb-3 font-semibold">Summary</h3>
             
-            <div className="text-center text-xs text-gray-600 mb-4 pb-4 border-b border-gray-200">
-              By placing your order, you agree to our <span className="text-[#007185] hover:underline cursor-pointer">privacy notice</span> and <span className="text-[#007185] hover:underline cursor-pointer">conditions of use</span>.
-            </div>
-
-            <h3 className="font-bold text-lg mb-2">Order Summary</h3>
-            <div className="space-y-1 text-sm mb-4 pb-4 border-b border-gray-200">
+            <div className="space-y-4 text-sm font-light text-zinc-600 mb-8">
               <div className="flex justify-between">
-                <span>Items ({ticketCount}):</span>
+                <span>Base ({ticketCount})</span>
                 <span>£{(ticketCount * basePrice).toFixed(2)}</span>
               </div>
               {addWeekly && (
                 <div className="flex justify-between">
-                  <span>Weekly Add-on:</span>
+                  <span>Weekly</span>
                   <span>£{(ticketCount * weeklyAddOnPrice).toFixed(2)}</span>
                 </div>
               )}
-              <div className="flex justify-between text-green-700">
-                <span>Total Tickets Granted:</span>
-                <span className="font-bold">{totalTickets}</span>
+              <div className="flex justify-between pt-4 border-t border-zinc-100 text-zinc-900">
+                <span>Total Entries</span>
+                <span className="font-medium text-lg">{totalTickets}</span>
               </div>
             </div>
 
-            <div className="flex justify-between font-bold text-xl text-red-700 mb-4">
-              <span>Order Total:</span>
-              <span>£{totalPrice.toFixed(2)}</span>
+            <div className="flex justify-between items-end mb-8">
+              <span className="text-sm font-medium text-zinc-900 uppercase tracking-widest">Total</span>
+              <span className="text-3xl font-serif text-zinc-900 tracking-tight">£{totalPrice.toFixed(2)}</span>
             </div>
 
-            <div className="bg-gray-100 p-3 rounded text-xs text-gray-600">
-              <span className="font-bold text-gray-800">Secure Checkout</span><br/>
-              Your transaction is encrypted and securely processed.
-            </div>
+            <button 
+              onClick={handlePurchase}
+              disabled={isSubmitting}
+              className="w-full py-4 border border-zinc-900 bg-zinc-900 text-white text-xs uppercase tracking-[0.15em] hover:bg-transparent hover:text-zinc-900 transition-colors duration-300 disabled:opacity-50 disabled:hover:bg-zinc-900 disabled:hover:text-white"
+            >
+              {isSubmitting ? 'Processing...' : 'Confirm Entry'}
+            </button>
           </div>
         </div>
       </div>
@@ -164,7 +162,7 @@ function CheckoutContent() {
 
 export default function CheckoutPage() {
   return (
-    <Suspense fallback={<div className="p-8 text-center font-bold">Loading checkout...</div>}>
+    <Suspense fallback={<div className="py-24 text-center font-light tracking-widest uppercase text-sm text-zinc-500">Loading checkout...</div>}>
       <CheckoutContent />
     </Suspense>
   );
