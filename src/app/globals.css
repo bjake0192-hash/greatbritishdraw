@@ -15,4 +15,6 @@ body {
   background: var(--background);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
+  zoom: 0.9;
+  transform-origin: top center;
 }
