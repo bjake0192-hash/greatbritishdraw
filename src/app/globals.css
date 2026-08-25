@@ -1,14 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-serif: var(--font-playfair);
+  --font-sans: var(--font-nunito);
+  --font-heading: var(--font-fredoka);
 }
 
 :root {
-  --background: #fdfbf7;
-  --foreground: #1c1917;
+  --background: #f0f9ff;
+  --foreground: #0f172a;
 }
 
 body {

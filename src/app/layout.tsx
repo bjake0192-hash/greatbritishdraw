@@ -1,26 +1,21 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { Fredoka, Nunito } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const fredoka = Fredoka({
+  variable: "--font-fredoka",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const nunito = Nunito({
+  variable: "--font-nunito",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "The Great British Draw",
-  description: "Premium competitions. Guaranteed winners.",
+  title: "GB Draw | Win Big for £1!",
+  description: "The UK's most fun and affordable prize draws.",
 };
 
 export default function RootLayout({
@@ -29,23 +24,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-[#fdfbf7] text-[#1c1917] selection:bg-[#1c1917] selection:text-[#fdfbf7]">
+    <html lang="en" className={`${fredoka.variable} ${nunito.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col bg-sky-50 text-slate-900 selection:bg-yellow-400 selection:text-slate-900">
         
-        <header className="w-full border-b border-[#1c1917]/10 py-6 px-6 md:px-12 flex justify-between items-center bg-white/50 backdrop-blur-sm sticky top-0 z-50">
-          <Link href="/" className="text-2xl font-serif tracking-tight">
-            The Great <span className="italic text-zinc-500">British</span> Draw.
+        <header className="w-full border-b-4 border-slate-900 py-4 px-6 md:px-12 flex justify-between items-center bg-white sticky top-0 z-50">
+          <Link href="/" className="text-3xl font-heading font-bold text-sky-500 flex items-center gap-2 hover:scale-105 transition-transform">
+            <span className="bg-yellow-400 text-slate-900 px-3 py-1 rounded-xl border-4 border-slate-900 transform -rotate-6 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)]">GB</span>
+            Draw
           </Link>
-          <nav className="hidden md:flex gap-8 text-xs font-medium tracking-[0.15em] uppercase text-zinc-500">
-            <Link href="/" className="hover:text-zinc-900 transition-colors">Competitions</Link>
-            <Link href="/admin" className="hover:text-zinc-900 transition-colors">Admin</Link>
+          <nav className="hidden md:flex gap-8 font-bold text-lg text-slate-600">
+            <Link href="/" className="hover:text-sky-500 hover:-translate-y-1 transition-all">Draws</Link>
+            <Link href="/admin" className="hover:text-sky-500 hover:-translate-y-1 transition-all">Admin</Link>
           </nav>
         </header>
 
         <main className="flex-1 flex flex-col">{children}</main>
         
-        <footer className="border-t border-[#1c1917]/10 py-16 text-center text-xs tracking-widest uppercase text-zinc-400 bg-white">
-          <p>© {new Date().getFullYear()} The Great British Draw. All rights reserved.</p>
+        <footer className="border-t-4 border-slate-900 py-12 text-center font-bold text-slate-500 bg-white">
+          <p>© {new Date().getFullYear()} Great British Draw. Win massive prizes for just a quid!</p>
         </footer>
       </body>
     </html>
